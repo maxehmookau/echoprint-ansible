@@ -1,0 +1,33 @@
+---
+- name: 'Add EPEL yum repo'
+  command: wget http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
+
+- name: 'Add another EPEL yum repo'
+  command: wget http://rpms.famillecollet.com/enterprise/remi-release-6.rpm
+
+- name: 'Finish up'
+  command: sudo rpm -Uvh remi-release-6*.rpm epel-release-6*.rpm
+
+- name: 'Install Dependencies'
+  sudo: true
+  action: yum name={{ item }} state=latest
+  with_items:
+    - zlib-devel
+    - java-1.6.0-openjdk-devel
+    - gzip
+    - bzip2
+    - bzip2-devel
+    - gcc
+    - gcc-c++
+    - kernel-devel
+    - git
+    - make
+
+- name: Install pip
+  yum: name=python-pip state=present
+
+- name: 'Install python web module'
+  command: sudo pip install web.py
+
+- name: 'Disable Firewall'
+  command: service iptables stop

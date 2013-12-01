@@ -1,0 +1,16 @@
+---
+- name: 'Fetch TokyoTyrant 1.1.41'
+  get_url: url=http://fallabs.com/tokyotyrant/tokyotyrant-1.1.41.tar.gz
+           dest=/opt/echoprint/vendor/tokyotyrant.tar.gz
+
+- name: 'Unzip TokyoTyrant 1.1.41'
+  command: tar xvzf tokyotyrant.tar.gz chdir=/opt/echoprint/vendor
+
+- name: 'Configure TokyoTyrant'
+  command: ./configure chdir=/opt/echoprint/vendor/tokyotyrant-1.1.41
+
+- name: 'Make TokyoTyrant'
+  command: make chdir=/opt/echoprint/vendor/tokyotyrant-1.1.41
+
+- name: 'Install TokyoTyrant'
+  command: make install chdir=/opt/echoprint/vendor/tokyotyrant-1.1.41

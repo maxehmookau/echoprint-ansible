@@ -1,0 +1,20 @@
+---
+- name: Create directory structure
+  file: state=directory
+        path=/opt/echoprint/vendor
+
+- name: 'Fetch TokyoCabinet 1.4.47'
+  get_url: url=http://fallabs.com/tokyocabinet/tokyocabinet-1.4.47.tar.gz
+           dest=/opt/echoprint/vendor/tokyocabinet.tar.gz
+
+- name: 'Unzip TokyoCabinet 1.4.47'
+  command: tar xvzf tokyocabinet.tar.gz chdir=/opt/echoprint/vendor
+
+- name: 'Configure TokyoCabinet'
+  command: ./configure chdir=/opt/echoprint/vendor/tokyocabinet-1.4.47
+
+- name: 'Make TokyoCabinet'
+  command: make chdir=/opt/echoprint/vendor/tokyocabinet-1.4.47
+
+- name: 'Install TokyoCabinet'
+  command: make install chdir=/opt/echoprint/vendor/tokyocabinet-1.4.47

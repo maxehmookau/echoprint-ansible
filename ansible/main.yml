@@ -1,0 +1,9 @@
+---
+- hosts: echoprint-servers
+  sudo: yes
+
+  roles:
+    - common
+    - tokyocabinet
+    - tokyotyrant
+    - echoprint-server

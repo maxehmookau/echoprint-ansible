@@ -1,0 +1,9 @@
+---
+- name: 'Checkout Echoprint Server'
+  git: repo=https://github.com/echonest/echoprint-server.git
+     dest=/opt/echoprint/vendor/server
+     version=master
+
+- name: 'Start Solr Server'
+  command: nohup java -Dsolr.solr.home=/opt/echoprint/vendor/server/solr/solr/solr -Djava.awt.headless=true -jar start.jar > output.log 2>&1 &
+           chdir=/opt/echoprint/vendor/server/solr/solr
